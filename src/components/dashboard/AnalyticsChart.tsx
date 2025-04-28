@@ -3,21 +3,25 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+interface AnalyticsChartProps {
+  className?: string;
+}
+
 const data = [
-  { name: 'Jan', value: 400 },
-  { name: 'Feb', value: 300 },
-  { name: 'Mar', value: 600 },
-  { name: 'Apr', value: 800 },
-  { name: 'May', value: 700 },
-  { name: 'Jun', value: 900 },
-  { name: 'Jul', value: 1100 },
+  { name: 'Jan', requests: 400, tokens: 2100 },
+  { name: 'Feb', requests: 300, tokens: 1800 },
+  { name: 'Mar', requests: 600, tokens: 3200 },
+  { name: 'Apr', requests: 800, tokens: 4100 },
+  { name: 'May', requests: 700, tokens: 3700 },
+  { name: 'Jun', requests: 900, tokens: 4500 },
+  { name: 'Jul', requests: 1100, tokens: 5200 },
 ];
 
-export function AnalyticsChart() {
+export function AnalyticsChart({ className }: AnalyticsChartProps) {
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader>
-        <CardTitle>Performance Analytics</CardTitle>
+        <CardTitle>API Usage Trends</CardTitle>
       </CardHeader>
       <CardContent className="pt-2">
         <div className="h-[250px]">
@@ -32,14 +36,19 @@ export function AnalyticsChart() {
               }}
             >
               <defs>
-                <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="colorRequests" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#7E69AB" stopOpacity={0.8} />
                   <stop offset="95%" stopColor="#7E69AB" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="colorTokens" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#5096C8" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#5096C8" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
               <XAxis dataKey="name" />
-              <YAxis />
+              <YAxis yAxisId="left" />
+              <YAxis yAxisId="right" orientation="right" />
               <Tooltip 
                 contentStyle={{
                   backgroundColor: '#fff',
@@ -48,11 +57,22 @@ export function AnalyticsChart() {
                 }}
               />
               <Area 
+                yAxisId="left"
                 type="monotone" 
-                dataKey="value" 
+                dataKey="requests" 
                 stroke="#7E69AB" 
                 fillOpacity={1} 
-                fill="url(#colorValue)" 
+                fill="url(#colorRequests)" 
+                name="API Requests"
+              />
+              <Area 
+                yAxisId="right"
+                type="monotone" 
+                dataKey="tokens" 
+                stroke="#5096C8" 
+                fillOpacity={1} 
+                fill="url(#colorTokens)" 
+                name="Tokens Used (K)"
               />
             </AreaChart>
           </ResponsiveContainer>

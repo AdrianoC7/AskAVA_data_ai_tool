@@ -6,9 +6,15 @@ import {
   BarChart3, 
   Settings, 
   Users, 
-  Calendar, 
+  Brain,
+  Cpu,
+  DollarSign,
   LayoutGrid,
-  Menu
+  Menu,
+  Zap,
+  Gauge,
+  Shield,
+  Clock
 } from "lucide-react";
 import { 
   Sidebar, 
@@ -28,9 +34,11 @@ import { useIsMobile } from "@/hooks/use-mobile";
 const navItems = [
   { icon: Home, label: "Dashboard", path: "/" },
   { icon: BarChart3, label: "Analytics", path: "/analytics" },
+  { icon: Cpu, label: "Models", path: "/models" },
+  { icon: DollarSign, label: "Cost Management", path: "/costs" },
+  { icon: Gauge, label: "Performance", path: "/performance" },
+  { icon: Shield, label: "Security", path: "/security" },
   { icon: Users, label: "Team", path: "/team" },
-  { icon: Calendar, label: "Calendar", path: "/calendar" },
-  { icon: LayoutGrid, label: "Projects", path: "/projects" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];
 
@@ -52,9 +60,9 @@ export function DashboardSidebar({ className }: { className?: string }) {
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-2">
             <div className="size-8 rounded-full bg-purple flex items-center justify-center">
-              <span className="text-white font-semibold">D</span>
+              <Brain className="h-5 w-5 text-white" />
             </div>
-            <h1 className="font-bold text-lg">Dashboard</h1>
+            <h1 className="font-bold text-lg">AI Analytics</h1>
           </div>
         </SidebarHeader>
         <SidebarContent className="p-2">
@@ -79,11 +87,11 @@ export function DashboardSidebar({ className }: { className?: string }) {
             <div className="flex items-center gap-2">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>AI</AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-medium">User Name</p>
-                <p className="text-xs text-muted-foreground">user@example.com</p>
+                <p className="text-sm font-medium">Admin User</p>
+                <p className="text-xs text-muted-foreground">admin@aianalytics.com</p>
               </div>
             </div>
             <Button variant="ghost" size="icon">
