@@ -9,12 +9,10 @@ import {
   Brain,
   Cpu,
   DollarSign,
-  LayoutGrid,
   Menu,
   Zap,
   Gauge,
   Shield,
-  Clock,
   MessageSquareText
 } from "lucide-react";
 import { 
@@ -31,16 +29,14 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router-dom";
 
 const navItems = [
-  { icon: Home, label: "Dashboard", path: "/" },
-  { icon: MessageSquareText, label: "Business Intelligence", path: "/business-intelligence" },
+  { icon: MessageSquareText, label: "Business Intelligence", path: "/" },
+  { icon: Home, label: "Dashboard", path: "/dashboard" },
   { icon: BarChart3, label: "Analytics", path: "/analytics" },
-  { icon: Cpu, label: "Models", path: "/models" },
   { icon: DollarSign, label: "Cost Management", path: "/costs" },
   { icon: Gauge, label: "Performance", path: "/performance" },
-  { icon: Shield, label: "Security", path: "/security" },
-  { icon: Users, label: "Team", path: "/team" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];
 
@@ -61,10 +57,10 @@ export function DashboardSidebar({ className }: { className?: string }) {
       <Sidebar className={cn("border-r", className)}>
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-2">
-            <div className="size-8 rounded-full bg-purple flex items-center justify-center">
-              <Brain className="h-5 w-5 text-white" />
+            <div className="size-8 rounded-full bg-navy flex items-center justify-center">
+              <Brain className="h-5 w-5 text-silver" />
             </div>
-            <h1 className="font-bold text-lg">AI Analytics</h1>
+            <h1 className="font-bold text-lg">Business AI</h1>
           </div>
         </SidebarHeader>
         <SidebarContent className="p-2">
@@ -72,13 +68,13 @@ export function DashboardSidebar({ className }: { className?: string }) {
             {navItems.map((item) => (
               <SidebarMenuItem key={item.label}>
                 <SidebarMenuButton asChild>
-                  <a 
-                    href={item.path} 
+                  <Link 
+                    to={item.path} 
                     className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-muted transition-colors"
                   >
                     <item.icon className="h-4 w-4" />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
@@ -93,7 +89,7 @@ export function DashboardSidebar({ className }: { className?: string }) {
               </Avatar>
               <div>
                 <p className="text-sm font-medium">Admin User</p>
-                <p className="text-xs text-muted-foreground">admin@aianalytics.com</p>
+                <p className="text-xs text-muted-foreground">admin@business.ai</p>
               </div>
             </div>
             <Button variant="ghost" size="icon">

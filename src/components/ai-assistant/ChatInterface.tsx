@@ -2,9 +2,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Bot, User, Loader2 } from "lucide-react";
+import { Send, Bot, User, Loader2, Mic, MicOff } from "lucide-react";
 import { toast } from "sonner";
 
 interface Message {
@@ -22,8 +21,10 @@ export function ChatInterface({ data, isDataLoaded }: ChatInterfaceProps) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  
   useEffect(() => {
     if (isDataLoaded && data && !messages.length) {
       // Add a welcome message when data is first loaded
@@ -84,6 +85,100 @@ export function ChatInterface({ data, isDataLoaded }: ChatInterfaceProps) {
     }
   };
 
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      const audioChunks: BlobPart[] = [];
+
+      mediaRecorderRef.current = mediaRecorder;
+      
+      mediaRecorder.addEventListener("dataavailable", (event) => {
+        audioChunks.push(event.data);
+      });
+      
+      mediaRecorder.addEventListener("stop", async () => {
+        const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+        
+        try {
+          setIsLoading(true);
+          // In a real app, you'd send this audio to a speech-to-text API
+          // For now, we'll simulate a transcription
+          const transcription = await simulateTranscription();
+          setInput(transcription);
+          
+          // Optional: Auto-submit after voice recording
+          if (transcription && isDataLoaded && data) {
+            const userMessage: Message = {
+              role: "user",
+              content: transcription,
+              timestamp: new Date()
+            };
+            
+            setMessages(prev => [...prev, userMessage]);
+            
+            const response = await simulateAIResponse(transcription, data);
+            
+            const assistantMessage: Message = {
+              role: "assistant",
+              content: response,
+              timestamp: new Date()
+            };
+            
+            setMessages(prev => [...prev, assistantMessage]);
+          }
+        } catch (error) {
+          console.error("Error processing speech:", error);
+          toast.error("Failed to process speech. Please try again.");
+        } finally {
+          setIsLoading(false);
+        }
+        
+        // Clean up
+        stream.getTracks().forEach(track => track.stop());
+      });
+      
+      mediaRecorder.start();
+      setIsRecording(true);
+      toast.info("Listening... Click the mic button again to stop.");
+    } catch (error) {
+      console.error("Error accessing microphone:", error);
+      toast.error("Could not access your microphone. Please check permissions.");
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
+
+  // This function simulates a speech-to-text transcription
+  const simulateTranscription = async (): Promise<string> => {
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Return a random business question to simulate transcription
+    const questions = [
+      "What can I improve in my business?",
+      "What were my best sales in December?",
+      "Who was the best sales person last year?",
+      "What are the trends in customer traffic during weekends?",
+      "Which products have the highest profit margins?"
+    ];
+    
+    return questions[Math.floor(Math.random() * questions.length)];
+  };
+
   // This function simulates an AI response - in a real app, you'd call the Claude API
   const simulateAIResponse = async (question: string, data: any[]): Promise<string> => {
     // Simulate network delay
@@ -107,18 +202,18 @@ export function ChatInterface({ data, isDataLoaded }: ChatInterfaceProps) {
   };
 
   return (
-    <div className="flex flex-col h-[500px] border rounded-lg">
-      <div className="flex items-center justify-between p-3 border-b bg-muted/30">
+    <div className="flex flex-col h-[500px] border rounded-lg bg-card">
+      <div className="flex items-center justify-between p-3 border-b bg-muted/50">
         <div className="flex items-center gap-2">
-          <Bot className="w-5 h-5 text-purple-500" />
+          <Bot className="w-5 h-5 text-primary" />
           <h3 className="font-medium">Business Data Assistant</h3>
         </div>
         {isDataLoaded ? (
-          <div className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+          <div className="px-2 py-1 text-xs bg-green-900/20 text-green-300 rounded-full">
             Data Loaded
           </div>
         ) : (
-          <div className="px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded-full">
+          <div className="px-2 py-1 text-xs bg-yellow-900/20 text-yellow-300 rounded-full">
             No Data Loaded
           </div>
         )}
@@ -146,20 +241,20 @@ export function ChatInterface({ data, isDataLoaded }: ChatInterfaceProps) {
                 >
                   <div className="flex-shrink-0">
                     {message.role === "user" ? (
-                      <div className="flex items-center justify-center w-8 h-8 bg-purple-100 rounded-full">
-                        <User className="w-4 h-4 text-purple-600" />
+                      <div className="flex items-center justify-center w-8 h-8 bg-primary/20 rounded-full">
+                        <User className="w-4 h-4 text-primary" />
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full">
-                        <Bot className="w-4 h-4 text-blue-600" />
+                      <div className="flex items-center justify-center w-8 h-8 bg-accent/50 rounded-full">
+                        <Bot className="w-4 h-4 text-accent-foreground" />
                       </div>
                     )}
                   </div>
                   <div
                     className={`p-3 rounded-lg ${
                       message.role === "user"
-                        ? "bg-purple-500 text-white"
-                        : "bg-gray-100"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted"
                     }`}
                   >
                     <p className="text-sm whitespace-pre-wrap">{message.content}</p>
@@ -174,11 +269,11 @@ export function ChatInterface({ data, isDataLoaded }: ChatInterfaceProps) {
           {isLoading && (
             <div className="flex gap-3">
               <div className="flex-shrink-0">
-                <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full">
-                  <Loader2 className="w-4 h-4 text-blue-600 animate-spin" />
+                <div className="flex items-center justify-center w-8 h-8 bg-accent/50 rounded-full">
+                  <Loader2 className="w-4 h-4 text-accent-foreground animate-spin" />
                 </div>
               </div>
-              <div className="p-3 bg-gray-100 rounded-lg">
+              <div className="p-3 bg-muted rounded-lg">
                 <p className="text-sm">Thinking...</p>
               </div>
             </div>
@@ -193,8 +288,17 @@ export function ChatInterface({ data, isDataLoaded }: ChatInterfaceProps) {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about your business data..."
           disabled={isLoading || !isDataLoaded}
-          className="flex-1"
+          className="flex-1 bg-background"
         />
+        <Button 
+          type="button" 
+          variant="outline" 
+          onClick={toggleRecording} 
+          disabled={isLoading || !isDataLoaded}
+          className={isRecording ? "bg-red-600 text-white hover:bg-red-700" : ""}
+        >
+          {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+        </Button>
         <Button type="submit" disabled={isLoading || !isDataLoaded || !input.trim()}>
           {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
         </Button>

@@ -70,6 +70,16 @@ export default {
 					DEFAULT: '#7E69AB',
 					light: '#9b87f5',
 					dark: '#6E59A5',
+				},
+				navy: {
+					DEFAULT: '#1A2B4C',
+					light: '#2A3B5C', 
+					dark: '#0A1B3C',
+				},
+				silver: {
+					DEFAULT: '#C0C0C0',
+					light: '#E0E0E0',
+					dark: '#A0A0A0',
 				}
 			},
 			borderRadius: {
