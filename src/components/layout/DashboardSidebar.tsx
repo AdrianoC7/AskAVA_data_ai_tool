@@ -14,7 +14,8 @@ import {
   Zap,
   Gauge,
   Shield,
-  Clock
+  Clock,
+  MessageSquareText
 } from "lucide-react";
 import { 
   Sidebar, 
@@ -33,6 +34,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const navItems = [
   { icon: Home, label: "Dashboard", path: "/" },
+  { icon: MessageSquareText, label: "Business Intelligence", path: "/business-intelligence" },
   { icon: BarChart3, label: "Analytics", path: "/analytics" },
   { icon: Cpu, label: "Models", path: "/models" },
   { icon: DollarSign, label: "Cost Management", path: "/costs" },

@@ -20,11 +20,11 @@ const COLORS = ["#7E69AB", "#5096C8", "#4AC1A0", "#E6A06F", "#F1757B"];
 export function AIModelUsage({ className }: AIModelUsageProps) {
   return (
     <Card className={className}>
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>AI Model Usage</CardTitle>
       </CardHeader>
       <CardContent className="pt-2">
-        <div className="h-[240px]">
+        <div className="h-[240px] flex items-center justify-center">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -48,6 +48,7 @@ export function AIModelUsage({ className }: AIModelUsageProps) {
                   borderRadius: '4px',
                 }}
               />
+              <Legend layout="horizontal" verticalAlign="bottom" align="center" />
             </PieChart>
           </ResponsiveContainer>
         </div>
