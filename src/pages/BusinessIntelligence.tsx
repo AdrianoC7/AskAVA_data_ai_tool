@@ -27,34 +27,34 @@ export default function BusinessIntelligence() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-6 animate-fade-in max-w-5xl mx-auto">
-        <div className="flex flex-col space-y-2">
+      <div className="space-y-8 animate-fade-in max-w-5xl mx-auto">
+        <div className="flex flex-col space-y-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold tracking-tight">HikmaAI</h1>
+            <h1 className="text-3xl font-bold tracking-tight">HikmaAI</h1>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="transition-all hover:bg-primary/10">
                   <Info className="w-4 h-4 mr-2" /> How It Works
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle>How HikmaAI Works</DialogTitle>
+                  <DialogTitle className="text-xl">How HikmaAI Works</DialogTitle>
                   <DialogDescription>
                     Upload your business data and chat with our AI assistant to gain insights
                   </DialogDescription>
                 </DialogHeader>
-                <div className="space-y-4 py-4">
+                <div className="space-y-5 py-4">
                   <div className="space-y-2">
-                    <h4 className="font-medium">Step 1: Upload Your Data</h4>
+                    <h4 className="font-medium text-primary">Step 1: Upload Your Data</h4>
                     <p className="text-sm text-muted-foreground">
                       Upload your business data in CSV or Excel format. We support data about sales, 
                       inventory, customer satisfaction, and more.
                     </p>
                   </div>
-                  <Separator />
+                  <Separator className="my-2" />
                   <div className="space-y-2">
-                    <h4 className="font-medium">Step 2: Ask Questions</h4>
+                    <h4 className="font-medium text-primary">Step 2: Ask Questions</h4>
                     <p className="text-sm text-muted-foreground">
                       Once your data is processed, you can ask natural language questions about your business.
                       For example:
@@ -65,9 +65,9 @@ export default function BusinessIntelligence() {
                       <li>What can I improve about my business operations?</li>
                     </ul>
                   </div>
-                  <Separator />
+                  <Separator className="my-2" />
                   <div className="space-y-2">
-                    <h4 className="font-medium">Step 3: Get Insights</h4>
+                    <h4 className="font-medium text-primary">Step 3: Get Insights</h4>
                     <p className="text-sm text-muted-foreground">
                       The AI assistant will analyze your data and provide meaningful insights and
                       recommendations tailored to your specific business.
@@ -77,13 +77,13 @@ export default function BusinessIntelligence() {
               </DialogContent>
             </Dialog>
           </div>
-          <p className="text-muted-foreground text-center text-lg">
+          <p className="text-muted-foreground text-center text-xl font-light mb-4">
             What do you want to know about your business?
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-7">
-          <Card className="md:col-span-3">
+        <div className="grid gap-8 md:grid-cols-7">
+          <Card className="md:col-span-3 border-primary/10 hover:border-primary/20 shadow-lg transition-all hover:shadow-xl">
             <CardHeader>
               <CardTitle>Data Upload</CardTitle>
               <CardDescription>
@@ -94,13 +94,13 @@ export default function BusinessIntelligence() {
               <FileUpload onFileProcessed={handleFileProcessed} />
               
               {isDataLoaded && (
-                <div className="mt-6 p-4 bg-muted/40 rounded-lg">
+                <div className="mt-6 p-4 bg-muted/30 rounded-lg border border-primary/10 animate-scale-in">
                   <h4 className="text-sm font-medium mb-2">Data Preview</h4>
                   <div className="text-xs max-h-48 overflow-auto">
                     {businessData && businessData.length > 0 ? (
                       <table className="w-full border-collapse">
                         <thead>
-                          <tr className="border-b">
+                          <tr className="border-b border-primary/10">
                             {Object.keys(businessData[0]).map((header, i) => (
                               <th key={i} className="p-1 text-left">{header}</th>
                             ))}
@@ -108,7 +108,7 @@ export default function BusinessIntelligence() {
                         </thead>
                         <tbody>
                           {businessData.slice(0, 5).map((row, i) => (
-                            <tr key={i} className="border-b last:border-0">
+                            <tr key={i} className="border-b border-border/50 last:border-0 hover:bg-muted/20 transition-colors">
                               {Object.values(row).map((value, j) => (
                                 <td key={j} className="p-1">{String(value)}</td>
                               ))}
@@ -128,7 +128,7 @@ export default function BusinessIntelligence() {
             </CardContent>
           </Card>
           
-          <Card className="md:col-span-4">
+          <Card className="md:col-span-4 border-primary/10 hover:border-primary/20 shadow-lg transition-all hover:shadow-xl">
             <CardHeader>
               <CardTitle>Business Assistant</CardTitle>
               <CardDescription>
