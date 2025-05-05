@@ -27,10 +27,10 @@ export default function BusinessIntelligence() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-6 animate-fade-in">
+      <div className="space-y-6 animate-fade-in max-w-5xl mx-auto">
         <div className="flex flex-col space-y-2">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold tracking-tight">Business Intelligence</h1>
+            <h1 className="text-2xl font-bold tracking-tight">HikmaAI</h1>
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm">
@@ -39,7 +39,7 @@ export default function BusinessIntelligence() {
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>How Business Intelligence Works</DialogTitle>
+                  <DialogTitle>How HikmaAI Works</DialogTitle>
                   <DialogDescription>
                     Upload your business data and chat with our AI assistant to gain insights
                   </DialogDescription>
@@ -77,8 +77,8 @@ export default function BusinessIntelligence() {
               </DialogContent>
             </Dialog>
           </div>
-          <p className="text-muted-foreground">
-            Upload your business data and ask questions to get AI-powered insights
+          <p className="text-muted-foreground text-center text-lg">
+            What do you want to know about your business?
           </p>
         </div>
 

@@ -19,7 +19,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<BusinessIntelligence />} />
           <Route path="/dashboard" element={<Index />} />
-          <Route path="/business-intelligence" element={<Navigate to="/" replace />} />
+          <Route path="/hikma-ai" element={<Navigate to="/" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

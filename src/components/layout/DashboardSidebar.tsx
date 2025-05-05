@@ -32,9 +32,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 
 const navItems = [
-  { icon: MessageSquareText, label: "Business Intelligence", path: "/" },
+  { icon: MessageSquareText, label: "HikmaAI", path: "/" },
   { icon: Home, label: "Dashboard", path: "/dashboard" },
-  { icon: BarChart3, label: "Analytics", path: "/analytics" },
   { icon: DollarSign, label: "Cost Management", path: "/costs" },
   { icon: Gauge, label: "Performance", path: "/performance" },
   { icon: Settings, label: "Settings", path: "/settings" },
@@ -46,7 +45,7 @@ export function DashboardSidebar({ className }: { className?: string }) {
   return (
     <>
       {isMobile && (
-        <div className="fixed top-4 left-4 z-50">
+        <div className="fixed bottom-4 left-4 z-50">
           <SidebarTrigger>
             <Button size="icon" variant="outline">
               <Menu className="h-4 w-4" />
@@ -60,7 +59,7 @@ export function DashboardSidebar({ className }: { className?: string }) {
             <div className="size-8 rounded-full bg-navy flex items-center justify-center">
               <Brain className="h-5 w-5 text-silver" />
             </div>
-            <h1 className="font-bold text-lg">Business AI</h1>
+            <h1 className="font-bold text-lg">HikmaAI</h1>
           </div>
         </SidebarHeader>
         <SidebarContent className="p-2">
@@ -85,11 +84,11 @@ export function DashboardSidebar({ className }: { className?: string }) {
             <div className="flex items-center gap-2">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>AI</AvatarFallback>
+                <AvatarFallback>HI</AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-sm font-medium">Admin User</p>
-                <p className="text-xs text-muted-foreground">admin@business.ai</p>
+                <p className="text-xs text-muted-foreground">admin@hikma.ai</p>
               </div>
             </div>
             <Button variant="ghost" size="icon">
