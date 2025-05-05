@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -85,15 +84,8 @@ export function FileUpload({ onFileProcessed }: FileUploadProps) {
   };
   
   return (
-    <div className="flex flex-col gap-4 p-4 border rounded-lg bg-card">
-      <div className="flex flex-col gap-2">
-        <h3 className="text-lg font-medium">Upload Business Data</h3>
-        <p className="text-sm text-muted-foreground">
-          Upload your CSV or Excel file to start analyzing your business data
-        </p>
-      </div>
-      
-      <div className="flex items-center gap-4">
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-3">
         <Input 
           type="file" 
           accept=".csv,.xls,.xlsx" 
@@ -103,20 +95,20 @@ export function FileUpload({ onFileProcessed }: FileUploadProps) {
           disabled={isUploading}
         />
         <label htmlFor="file-upload" className="flex-1">
-          <div className="flex items-center justify-center w-full h-24 px-4 transition-colors border border-dashed rounded-lg cursor-pointer hover:bg-muted/30">
+          <div className="flex items-center justify-center w-full h-14 px-4 transition-colors border border-dashed rounded-md cursor-pointer hover:bg-muted/30">
             {!fileName ? (
-              <div className="flex flex-col items-center gap-2">
-                <Upload className="w-6 h-6 text-muted-foreground" />
+              <div className="flex items-center gap-2">
+                <Upload className="w-4 h-4 text-muted-foreground" />
                 <span className="text-sm font-medium">
                   {isUploading ? "Uploading..." : "Click to upload CSV or Excel"}
                 </span>
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <FileSpreadsheet className="w-6 h-6 text-blue-500" />
-                <span className="text-sm font-medium">{fileName}</span>
-                {uploadStatus === "success" && <CheckCircle className="w-5 h-5 text-green-500" />}
-                {uploadStatus === "error" && <AlertCircle className="w-5 h-5 text-destructive" />}
+                <FileSpreadsheet className="w-4 h-4 text-blue-500" />
+                <span className="text-sm font-medium truncate max-w-[150px]">{fileName}</span>
+                {uploadStatus === "success" && <CheckCircle className="w-4 h-4 text-green-500" />}
+                {uploadStatus === "error" && <AlertCircle className="w-4 h-4 text-destructive" />}
               </div>
             )}
           </div>
@@ -124,6 +116,7 @@ export function FileUpload({ onFileProcessed }: FileUploadProps) {
         <Button
           disabled={!fileName || isUploading || uploadStatus === "success"}
           onClick={() => document.getElementById("file-upload")?.click()}
+          size="sm"
         >
           {isUploading ? "Processing..." : "Upload"}
         </Button>

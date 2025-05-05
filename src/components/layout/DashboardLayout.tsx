@@ -12,11 +12,11 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const isMobile = useIsMobile();
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={!isMobile}>
       <div className="min-h-screen flex w-full">
         {!isMobile && <DashboardSidebar />}
         <div className="flex-1">
-          <main className="p-4 md:p-6 max-w-7xl mx-auto">
+          <main className="p-4 md:p-6 max-w-7xl mx-auto w-full transition-all duration-200">
             {children}
           </main>
         </div>

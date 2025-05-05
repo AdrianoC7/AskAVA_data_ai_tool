@@ -8,7 +8,9 @@ import {
   DollarSign,
   Menu,
   Gauge,
-  MessageSquareText
+  MessageSquareText,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { 
   Sidebar, 
@@ -18,13 +20,15 @@ import {
   SidebarMenu, 
   SidebarMenuItem, 
   SidebarMenuButton,
-  SidebarTrigger
+  SidebarTrigger,
+  useSidebar
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navItems = [
   { icon: MessageSquareText, label: "HikmaAI", path: "/" },
@@ -36,6 +40,7 @@ const navItems = [
 
 export function DashboardSidebar({ className }: { className?: string }) {
   const isMobile = useIsMobile();
+  const { toggleSidebar, state } = useSidebar();
 
   return (
     <>
@@ -49,19 +54,33 @@ export function DashboardSidebar({ className }: { className?: string }) {
         </div>
       )}
       <Sidebar className={cn("border-r border-border", className)}>
-        <SidebarHeader className="p-4">
+        <SidebarHeader className="p-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="size-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-sm">
               <Brain className="h-5 w-5 text-white" />
             </div>
             <h1 className="font-bold text-lg bg-gradient-to-r from-foreground to-foreground/90 bg-clip-text text-transparent">HikmaAI</h1>
           </div>
+          {!isMobile && (
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-7 w-7 rounded-full hover:bg-muted"
+              onClick={toggleSidebar}
+            >
+              {state === "expanded" ? (
+                <ChevronLeft className="h-4 w-4" />
+              ) : (
+                <ChevronRight className="h-4 w-4" />
+              )}
+            </Button>
+          )}
         </SidebarHeader>
         <SidebarContent className="p-2">
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.label}>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild tooltip={item.label}>
                   <Link 
                     to={item.path} 
                     className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-muted transition-all hover:translate-x-1 duration-200"
@@ -86,9 +105,14 @@ export function DashboardSidebar({ className }: { className?: string }) {
                 <p className="text-xs text-muted-foreground">admin@hikma.ai</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" className="hover:bg-muted rounded-full transition-colors">
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" className="hover:bg-muted rounded-full transition-colors">
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Log out</TooltipContent>
+            </Tooltip>
           </div>
         </SidebarFooter>
       </Sidebar>

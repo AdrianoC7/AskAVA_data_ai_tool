@@ -27,7 +27,7 @@ export default function BusinessIntelligence() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-8 animate-fade-in max-w-5xl mx-auto">
+      <div className="space-y-6 animate-fade-in max-w-5xl mx-auto">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center justify-between">
             <h1 className="text-3xl font-bold tracking-tight">HikmaAI</h1>
@@ -82,21 +82,27 @@ export default function BusinessIntelligence() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-7">
-          <Card className="md:col-span-3 border-primary/10 hover:border-primary/20 shadow-lg transition-all hover:shadow-xl">
-            <CardHeader>
+        <div className="flex flex-col space-y-4">
+          {/* Data Upload - Now with smaller height */}
+          <Card className="border-primary/10 hover:border-primary/20 shadow-sm transition-all hover:shadow-md">
+            <CardHeader className="py-4">
               <CardTitle>Data Upload</CardTitle>
               <CardDescription>
                 Upload your CSV or Excel files to analyze
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pb-4">
               <FileUpload onFileProcessed={handleFileProcessed} />
               
               {isDataLoaded && (
-                <div className="mt-6 p-4 bg-muted/30 rounded-lg border border-primary/10 animate-scale-in">
-                  <h4 className="text-sm font-medium mb-2">Data Preview</h4>
-                  <div className="text-xs max-h-48 overflow-auto">
+                <div className="mt-4 p-3 bg-muted/30 rounded-lg border border-primary/10 animate-scale-in">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="text-sm font-medium">Data Preview</h4>
+                    <p className="text-xs text-muted-foreground">
+                      {businessData ? `Showing ${Math.min(5, businessData.length)} of ${businessData.length} records` : "No data available"}
+                    </p>
+                  </div>
+                  <div className="text-xs max-h-28 overflow-auto">
                     {businessData && businessData.length > 0 ? (
                       <table className="w-full border-collapse">
                         <thead>
@@ -120,15 +126,13 @@ export default function BusinessIntelligence() {
                       <p>No data available</p>
                     )}
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    {businessData ? `Showing ${Math.min(5, businessData.length)} of ${businessData.length} records` : "No data available"}
-                  </p>
                 </div>
               )}
             </CardContent>
           </Card>
           
-          <Card className="md:col-span-4 border-primary/10 hover:border-primary/20 shadow-lg transition-all hover:shadow-xl">
+          {/* Business Assistant - Now taking full width below */}
+          <Card className="border-primary/10 hover:border-primary/20 shadow-lg transition-all hover:shadow-xl flex-grow">
             <CardHeader>
               <CardTitle>Business Assistant</CardTitle>
               <CardDescription>
