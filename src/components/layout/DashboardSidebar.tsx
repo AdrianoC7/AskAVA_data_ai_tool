@@ -42,19 +42,19 @@ export function DashboardSidebar({ className }: { className?: string }) {
       {isMobile && (
         <div className="fixed bottom-4 left-4 z-50">
           <SidebarTrigger>
-            <Button size="icon" variant="outline" className="shadow-md hover:shadow-lg transition-all">
+            <Button size="icon" variant="outline" className="shadow-sm hover:shadow-md transition-all">
               <Menu className="h-4 w-4" />
             </Button>
           </SidebarTrigger>
         </div>
       )}
-      <Sidebar className={cn("border-r border-primary/10", className)}>
+      <Sidebar className={cn("border-r border-border", className)}>
         <SidebarHeader className="p-4">
           <div className="flex items-center gap-2">
-            <div className="size-8 rounded-full bg-gradient-to-br from-navy to-navy-dark flex items-center justify-center shadow-inner">
-              <Brain className="h-5 w-5 text-silver animate-pulse" />
+            <div className="size-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-sm">
+              <Brain className="h-5 w-5 text-white" />
             </div>
-            <h1 className="font-bold text-lg bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">HikmaAI</h1>
+            <h1 className="font-bold text-lg bg-gradient-to-r from-foreground to-foreground/90 bg-clip-text text-transparent">HikmaAI</h1>
           </div>
         </SidebarHeader>
         <SidebarContent className="p-2">
@@ -74,10 +74,10 @@ export function DashboardSidebar({ className }: { className?: string }) {
             ))}
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter className="p-4 border-t border-primary/10">
+        <SidebarFooter className="p-4 border-t border-border">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Avatar className="h-8 w-8 border border-primary/20">
+              <Avatar className="h-8 w-8 border border-border">
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>HI</AvatarFallback>
               </Avatar>
@@ -86,7 +86,7 @@ export function DashboardSidebar({ className }: { className?: string }) {
                 <p className="text-xs text-muted-foreground">admin@hikma.ai</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" className="hover:bg-primary/10 rounded-full transition-colors">
+            <Button variant="ghost" size="icon" className="hover:bg-muted rounded-full transition-colors">
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>

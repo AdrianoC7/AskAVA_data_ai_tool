@@ -7,45 +7,45 @@
 
 @layer base {
   :root {
-    /* Dark theme with navy and silver */
-    --background: 220 25% 10%;
-    --foreground: 0 0% 95%;
+    /* Light modern theme with clean colors */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 220 25% 13%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 220 25% 13%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 210 60% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 220 25% 22%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 220 25% 18%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 60% 20%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 70% 50%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 25% 20%;
-    --input: 220 25% 20%;
-    --ring: 210 60% 50%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 220 25% 8%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 210 60% 50%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 220 25% 15%;
-    --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 220 25% 15%;
-    --sidebar-ring: 210 60% 55%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 221 83% 53%;
   }
 }
 
@@ -62,7 +62,7 @@
 
 @layer components {
   .dashboard-card {
-    @apply bg-card rounded-lg shadow-md p-5 border border-border transition-all hover:shadow-lg;
+    @apply bg-card rounded-lg shadow-sm p-5 border border-border transition-all hover:shadow-md;
   }
   
   .stats-value {
@@ -74,18 +74,18 @@
   }
   
   .hero-gradient {
-    @apply bg-gradient-to-r from-navy-dark via-navy to-navy-light;
+    @apply bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200;
   }
   
   .silver-gradient {
-    @apply bg-gradient-to-r from-silver-dark via-silver to-silver-light;
+    @apply bg-gradient-to-r from-gray-50 via-gray-100 to-gray-200;
   }
   
   .navy-accent {
-    @apply border-l-4 border-navy pl-3;
+    @apply border-l-4 border-blue-500 pl-3;
   }
   
   .silver-accent {
-    @apply border-l-4 border-silver pl-3;
+    @apply border-l-4 border-gray-300 pl-3;
   }
 }
