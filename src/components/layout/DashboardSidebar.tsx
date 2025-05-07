@@ -31,7 +31,7 @@ import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navItems = [
-  { icon: MessageSquareText, label: "HikmaAI", path: "/" },
+  { icon: MessageSquareText, label: "AskAVA", path: "/" },
   { icon: Home, label: "Dashboard", path: "/dashboard" },
   { icon: DollarSign, label: "Cost Management", path: "/costs" },
   { icon: Gauge, label: "Performance", path: "/performance" },
@@ -59,7 +59,7 @@ export function DashboardSidebar({ className }: { className?: string }) {
             <div className="size-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-sm">
               <Brain className="h-5 w-5 text-white" />
             </div>
-            <h1 className="font-bold text-lg bg-gradient-to-r from-foreground to-foreground/90 bg-clip-text text-transparent">HikmaAI</h1>
+            <h1 className="font-bold text-lg bg-gradient-to-r from-foreground to-foreground/90 bg-clip-text text-transparent">AskAVA</h1>
           </div>
           {!isMobile && (
             <Button 
@@ -98,11 +98,11 @@ export function DashboardSidebar({ className }: { className?: string }) {
             <div className="flex items-center gap-2">
               <Avatar className="h-8 w-8 border border-border">
                 <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>HI</AvatarFallback>
+                <AvatarFallback>AV</AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-sm font-medium">Admin User</p>
-                <p className="text-xs text-muted-foreground">admin@hikma.ai</p>
+                <p className="text-xs text-muted-foreground">admin@askava.ai</p>
               </div>
             </div>
             <Tooltip>

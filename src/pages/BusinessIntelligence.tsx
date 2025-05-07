@@ -30,7 +30,7 @@ export default function BusinessIntelligence() {
       <div className="space-y-6 animate-fade-in max-w-5xl mx-auto">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold tracking-tight">HikmaAI</h1>
+            <h1 className="text-3xl font-bold tracking-tight">AskAVA</h1>
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm" className="transition-all hover:bg-primary/10">
@@ -39,9 +39,9 @@ export default function BusinessIntelligence() {
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle className="text-xl">How HikmaAI Works</DialogTitle>
+                  <DialogTitle className="text-xl">How AskAVA Works</DialogTitle>
                   <DialogDescription>
-                    Upload your business data and chat with our AI assistant to gain insights
+                    Talk to your data - Analyze, Visualize, Act
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-5 py-4">
@@ -69,7 +69,7 @@ export default function BusinessIntelligence() {
                   <div className="space-y-2">
                     <h4 className="font-medium text-primary">Step 3: Get Insights</h4>
                     <p className="text-sm text-muted-foreground">
-                      The AI assistant will analyze your data and provide meaningful insights and
+                      AskAVA will analyze your data and provide meaningful insights and
                       recommendations tailored to your specific business.
                     </p>
                   </div>
@@ -78,7 +78,7 @@ export default function BusinessIntelligence() {
             </Dialog>
           </div>
           <p className="text-muted-foreground text-center text-xl font-light mb-4">
-            What do you want to know about your business?
+            Talk to your data - Analyze, Visualize, Act
           </p>
         </div>
 
@@ -134,9 +134,9 @@ export default function BusinessIntelligence() {
           {/* Business Assistant - Now taking full width below */}
           <Card className="border-primary/10 hover:border-primary/20 shadow-lg transition-all hover:shadow-xl flex-grow">
             <CardHeader>
-              <CardTitle>Business Assistant</CardTitle>
+              <CardTitle>Data Assistant</CardTitle>
               <CardDescription>
-                Ask questions about your business data
+                Ask questions about your data
               </CardDescription>
             </CardHeader>
             <CardContent>
