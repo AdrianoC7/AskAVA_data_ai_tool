@@ -4,7 +4,7 @@ import {
   ArrowRight, 
   Home, 
   Settings, 
-  Brain,
+  Zap,
   DollarSign,
   Menu,
   Gauge,
@@ -56,10 +56,17 @@ export function DashboardSidebar({ className }: { className?: string }) {
       <Sidebar className={cn("border-r border-border", className)}>
         <SidebarHeader className="p-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="size-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-sm">
-              <Brain className="h-5 w-5 text-white" />
+            <div className="relative size-8">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 rounded-full shadow-lg opacity-80"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Zap className="h-5 w-5 text-white drop-shadow-sm" />
+              </div>
             </div>
-            <h1 className="font-bold text-lg bg-gradient-to-r from-foreground to-foreground/90 bg-clip-text text-transparent">AskAVA</h1>
+            <div>
+              <h1 className="font-bold text-lg tracking-tight bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 bg-clip-text text-transparent">
+                Ask<span className="font-black">AVA</span>
+              </h1>
+            </div>
           </div>
           {!isMobile && (
             <Button 
