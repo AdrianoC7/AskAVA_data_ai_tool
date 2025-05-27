@@ -31,7 +31,7 @@ import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navItems = [
-  { icon: MessageSquareText, label: "AskAVA", path: "/" },
+  { icon: MessageSquareText, label: "AskAVA", path: "/askava" },
   { icon: Home, label: "Dashboard", path: "/dashboard" },
   { icon: DollarSign, label: "Cost Management", path: "/costs" },
   { icon: Gauge, label: "Performance", path: "/performance" },
@@ -55,12 +55,13 @@ export function DashboardSidebar({ className }: { className?: string }) {
       )}
       <Sidebar className={cn("border-r border-border", className)}>
         <SidebarHeader className="p-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="relative size-8">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 rounded-full shadow-lg opacity-80"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Zap className="h-5 w-5 text-white drop-shadow-sm" />
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="relative w-8 h-8">
+              <img 
+                src="/lovable-uploads/4fa6f6b1-f31d-4030-a5ba-daefdb466206.png" 
+                alt="AskAVA Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <h1 className="font-bold text-lg tracking-tight bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 bg-clip-text text-transparent">
