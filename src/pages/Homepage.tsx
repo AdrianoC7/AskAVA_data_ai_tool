@@ -45,11 +45,16 @@ export default function Homepage() {
         {/* Header */}
         <div className="text-center mb-20">
           <div className="flex justify-center mb-6">
-            <img 
-              src="/lovable-uploads/4fa6f6b1-f31d-4030-a5ba-daefdb466206.png" 
-              alt="AskAVA Logo"
-              className="w-16 h-16 object-contain"
-            />
+            {/* Custom Logo */}
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl rotate-12 transform"></div>
+              <div className="absolute inset-1 bg-gradient-to-tr from-blue-400 to-blue-600 rounded-xl rotate-6 transform"></div>
+              <div className="absolute inset-2 bg-gradient-to-bl from-blue-300 to-blue-500 rounded-lg transform flex items-center justify-center">
+                <div className="w-4 h-4 bg-white rounded-full"></div>
+                <div className="absolute w-2 h-2 bg-blue-600 rounded-full top-3 right-3"></div>
+                <div className="absolute w-1 h-1 bg-blue-700 rounded-full bottom-2 left-2"></div>
+              </div>
+            </div>
           </div>
           <h1 className="text-6xl font-black mb-3 text-gray-900">
             Ask<span className="text-blue-600">AVA</span>

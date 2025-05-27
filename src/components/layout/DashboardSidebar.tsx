@@ -56,12 +56,15 @@ export function DashboardSidebar({ className }: { className?: string }) {
       <Sidebar className={cn("border-r border-border", className)}>
         <SidebarHeader className="p-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            {/* Custom Logo */}
             <div className="relative w-8 h-8">
-              <img 
-                src="/lovable-uploads/4fa6f6b1-f31d-4030-a5ba-daefdb466206.png" 
-                alt="AskAVA Logo"
-                className="w-full h-full object-contain"
-              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg rotate-12 transform"></div>
+              <div className="absolute inset-0.5 bg-gradient-to-tr from-blue-400 to-blue-600 rounded-md rotate-6 transform"></div>
+              <div className="absolute inset-1 bg-gradient-to-bl from-blue-300 to-blue-500 rounded-sm transform flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="absolute w-1 h-1 bg-blue-600 rounded-full top-1.5 right-1.5"></div>
+                <div className="absolute w-0.5 h-0.5 bg-blue-700 rounded-full bottom-1 left-1"></div>
+              </div>
             </div>
             <div>
               <h1 className="font-bold text-lg tracking-tight bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 bg-clip-text text-transparent">
