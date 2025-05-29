@@ -1,15 +1,28 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search, Plus, Home, TrendingUp, BarChart3, FileText, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { FileUpload } from "@/components/data-upload/FileUpload";
+import { ChatInterface } from "@/components/ai-assistant/ChatInterface";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 
 export default function Homepage() {
+  const [businessData, setBusinessData] = useState<any[] | null>(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
   const sidebarItems = [
     { icon: Home, label: "Home", active: true },
     { icon: TrendingUp, label: "Insights" },
     { icon: BarChart3, label: "Predictions" },
   ];
+
+  const handleFileProcessed = (data: any) => {
+    setBusinessData(data);
+    setIsDataLoaded(true);
+    console.log("Data processed:", data);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -80,63 +93,116 @@ export default function Homepage() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center justify-center relative">
         {/* Center content */}
-        <div className="w-full max-w-2xl px-8">
+        <div className="w-full max-w-4xl px-8">
           {/* Logo */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-light text-gray-800 mb-4">AskAVA</h1>
             <p className="text-gray-600 text-lg">Upload and ask questions about your business</p>
           </div>
 
-          {/* Search Interface */}
-          <div className="relative">
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm">
-              <div className="p-6">
-                <textarea 
-                  placeholder="Ask anything..."
-                  className="w-full h-20 resize-none border-0 outline-none text-gray-800 placeholder-gray-400 text-lg"
-                />
-                <div className="flex items-center justify-between mt-4">
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="text-gray-600 border-gray-300 hover:bg-gray-50">
-                      <Search className="w-4 h-4 mr-2" />
-                      Search
-                    </Button>
-                    <Button variant="outline" size="sm" className="text-gray-600 border-gray-300 hover:bg-gray-50">
-                      Focus
-                    </Button>
-                    <Button variant="outline" size="sm" className="text-gray-600 border-gray-300 hover:bg-gray-50">
-                      Attach
-                    </Button>
+          {/* File Upload Section */}
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm mb-6">
+            <div className="p-6">
+              <h3 className="text-lg font-medium mb-4">Upload Your Data</h3>
+              <FileUpload onFileProcessed={handleFileProcessed} />
+              
+              {isDataLoaded && (
+                <div className="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="text-sm font-medium">Data Preview</h4>
+                    <p className="text-xs text-gray-500">
+                      {businessData ? `Showing ${Math.min(5, businessData.length)} of ${businessData.length} records` : "No data available"}
+                    </p>
                   </div>
-                  <div className="flex gap-3 items-center">
-                    <Button variant="ghost" size="sm" className="text-gray-400 hover:text-gray-600">
-                      <FileText className="w-4 h-4" />
-                    </Button>
-                    <Button 
-                      className="bg-teal-600 hover:bg-teal-700 text-white rounded-lg px-4 py-2"
-                      onClick={() => {/* Handle submit */}}
-                    >
-                      <div className="w-4 h-4 bg-white rounded-sm flex items-center justify-center">
-                        <div className="w-2 h-2 bg-teal-600 rounded-full"></div>
-                      </div>
-                    </Button>
+                  <div className="text-xs max-h-28 overflow-auto">
+                    {businessData && businessData.length > 0 ? (
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr className="border-b border-gray-200">
+                            {Object.keys(businessData[0]).map((header, i) => (
+                              <th key={i} className="p-1 text-left">{header}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {businessData.slice(0, 5).map((row, i) => (
+                            <tr key={i} className="border-b border-gray-100 last:border-0">
+                              {Object.values(row).map((value, j) => (
+                                <td key={j} className="p-1">{String(value)}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <p>No data available</p>
+                    )}
                   </div>
                 </div>
-              </div>
+              )}
+            </div>
+          </div>
+
+          {/* Chat Interface */}
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm">
+            <div className="p-6">
+              <ChatInterface data={businessData} isDataLoaded={isDataLoaded} />
             </div>
           </div>
         </div>
 
         {/* How to use button - bottom right */}
         <div className="absolute bottom-8 right-8">
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="bg-white border-gray-300 text-gray-600 hover:bg-gray-50 shadow-sm"
-          >
-            <HelpCircle className="w-4 h-4 mr-2" />
-            How to use
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="bg-white border-gray-300 text-gray-600 hover:bg-gray-50 shadow-sm"
+              >
+                <HelpCircle className="w-4 h-4 mr-2" />
+                How to use
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle className="text-xl">How AskAVA Works</DialogTitle>
+                <DialogDescription>
+                  Talk to your data - Analyze, Visualize, Act
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-5 py-4">
+                <div className="space-y-2">
+                  <h4 className="font-medium text-blue-600">Step 1: Upload Your Data</h4>
+                  <p className="text-sm text-gray-600">
+                    Upload your business data in CSV or Excel format. We support data about sales, 
+                    inventory, customer satisfaction, and more.
+                  </p>
+                </div>
+                <Separator className="my-2" />
+                <div className="space-y-2">
+                  <h4 className="font-medium text-blue-600">Step 2: Ask Questions</h4>
+                  <p className="text-sm text-gray-600">
+                    Once your data is processed, you can ask natural language questions about your business.
+                    For example:
+                  </p>
+                  <ul className="text-sm text-gray-600 list-disc pl-5 space-y-1">
+                    <li>What were my best-selling products last month?</li>
+                    <li>Which day of the week has the highest customer traffic?</li>
+                    <li>What can I improve about my business operations?</li>
+                  </ul>
+                </div>
+                <Separator className="my-2" />
+                <div className="space-y-2">
+                  <h4 className="font-medium text-blue-600">Step 3: Get Insights</h4>
+                  <p className="text-sm text-gray-600">
+                    AskAVA will analyze your data and provide meaningful insights and
+                    recommendations tailored to your specific business.
+                  </p>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* Footer */}
